@@ -1,0 +1,693 @@
+---
+title: "Introdução à Linguagem R"
+subtitle: Encontro 1/4
+header-includes:
+  - \usepackage[english,brazil]{babel}
+author: "Davi Moreira"
+date: "`r format(Sys.time(), '%d de %B, %Y')`"
+output:
+  pdf_document:
+    toc: yes
+    number_sections: true
+  html_document:
+    code_folding: hide
+    collapsed: yes
+    theme: united
+    toc: yes
+    toc_float: yes
+  urlcolor: blue  
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+# tex / pandoc options for pdf creation
+x <- Sys.getenv("PATH")
+y <- paste(x, "/miktex/bin", sep=";")
+Sys.setenv(PATH = y)
+```
+
+\newpage 
+<!-- COMENTARIO --> 
+
+# Encontro 1
+
+## Estrutura Encontro 1
+
+1. INTRODUÇÃO, IMPORTAÇÃO E EXPORTAÇÃO DE DADOS
+- Apresentação do ambiente R e do RStudio;
+- Versionamento: GitHub;
+- Onde obter ajuda;
+- Estruturas de dados no R (variáveis, vetores, matrizes, listas, data frame); 
+- Operadores matemáticos e operadores lógicos;
+- Tipos de arquivos de dados;
+- Importação e exportação de dados;
+
+## Obejtivos do primeiro encontro
+
+Até o final do encontro o aluno deverá ser capaz de:
+
+- Criar projeto no RStudio, garantindo seu versionamento;
+- Importar base de dados;
+- Obter informações relevantes sobre os dados importados.
+
+## Material do curso
+
+- O conteúdo do curso estará compartilhado neste [\textcolor{blue}{Repositório do Git}](https://github.com/davi-moreira/curso-r-ufpe-2018). 
+- Ao longo dos encontros diferentes referências serão utilizadas e apresentadas. 
+Entre elas, três se destacam:
+
+1. [\textcolor{blue}{R for Data Science;}](https://r4ds.had.co.nz/)
+2. [\textcolor{blue}{Modern Dive - Statistical Inference via Data Science;}](https://moderndive.com/index.html)
+3. [\textcolor{blue}{Curso R;}](http://material.curso-r.com/rbase/)
+
+<!-- \newpage --> 
+ 
+# R, o RStudio e o GitHub
+
+## O que é o R?
+
+R é uma linguagem de programação e também um ambiente de desenvolvimento integrado 
+para cálculos estatísticos e gráficos ([Wikipédia](https://pt.wikipedia.org/wiki/R_(linguagem_de_programa%C3%A7%C3%A3o))). 
+
+```{r fig.width=1, fig.height=10, fig.align="center", echo=FALSE}
+library(png)
+library(grid)
+img <- readPNG("./imagens/R_logo.png")
+ grid.raster(img)
+```
+
+## O que é o RStudio?
+
+O [RStudio](https://www.rstudio.com/) é um software livre de ambiente de desenvolvimento integrado (IDE) para R ([Wikipédia RStudio](https://pt.wikipedia.org/wiki/RStudio)). IDE, do inglês *Integrated Development Environment* ou Ambiente de Desenvolvimento Integrado, é um programa de computador que reúne características e ferramentas de apoio ao desenvolvimento de software com o objetivo de agilizar este processo ([Wikipédia IDE](https://pt.wikipedia.org/wiki/Ambiente_de_desenvolvimento_integrado)).
+
+## O ambiente do RStudio
+
+```{r fig.width=5, fig.height=50, fig.align="center", echo=FALSE}
+library(png)
+library(jpeg)
+library(grid)
+img <- readJPEG("./imagens/1-tela-inicial.jpeg")
+ grid.raster(img)
+```
+
+## O R e o RStudio
+
+```{r fig.width=5, fig.height=50, fig.align="center", echo=FALSE}
+library(png)
+library(jpeg)
+library(grid)
+img <- readJPEG("./imagens/1-tela-inicial.jpeg")
+ grid.raster(img)
+```
+
+## O que é versionamento e o GitHub?
+
+Um sistema de controle de versões (ou versionamento - [\textcolor{blue}{Wiki}](https://pt.wikipedia.org/wiki/Sistema_de_controle_de_vers%C3%B5es)), VCS (do inglês *version control system*) ou ainda SCM (do inglês *source code management*) na função prática da Ciência da Computação e da Engenharia de Software, é um software que tem a finalidade de gerenciar diferentes versões no desenvolvimento de um documento qualquer. 
+
+O [\textcolor{blue}{GitHub}](https://github.com/) é uma plataforma de hospedagem de código para controle de versão e colaboração. Ele permite que você e outros trabalhem juntos em projetos de qualquer lugar. Para mais detalhes, veja [\textcolor{blue}{este Tutorial}](https://guides.github.com/activities/hello-world/).
+
+### Fluxo de versionamento:
+
+**Base de dados inicial**
+
+```{r fig.width=5, fig.height=50, fig.align="center", echo=FALSE}
+library(png)
+library(jpeg)
+library(grid)
+img <- readPNG("./imagens/0-git.png")
+ grid.raster(img)
+```
+
+**Pré-processamento**
+
+```{r fig.width=5, fig.height=50, fig.align="center", echo=FALSE}
+library(png)
+library(jpeg)
+library(grid)
+img <- readPNG("./imagens/1-git.png")
+ grid.raster(img)
+```
+
+**Recuperação de versões**
+
+```{r fig.width=5, fig.height=50, fig.align="center", echo=FALSE}
+library(png)
+library(jpeg)
+library(grid)
+img <- readPNG("./imagens/2-git.png")
+ grid.raster(img)
+```
+
+
+```{r fig.width=5, fig.height=50, fig.align="center", echo=FALSE}
+library(png)
+library(jpeg)
+library(grid)
+img <- readPNG("./imagens/3-git.png")
+ grid.raster(img)
+```
+
+**Versões paralelas**
+
+```{r fig.width=5, fig.height=50, fig.align="center", echo=FALSE}
+library(png)
+library(jpeg)
+library(grid)
+img <- readPNG("./imagens/3-git.png")
+ grid.raster(img)
+```
+
+**Versões paralelas**
+
+```{r fig.width=5, fig.height=50, fig.align="center", echo=FALSE}
+library(png)
+library(jpeg)
+library(grid)
+img <- readPNG("./imagens/4-git.png")
+ grid.raster(img)
+```
+
+**Visão global**
+
+```{r fig.width=5, fig.height=50, fig.align="center", echo=FALSE}
+library(png)
+library(jpeg)
+library(grid)
+img <- readPNG("./imagens/5-git.png")
+ grid.raster(img)
+```
+
+<!-- \newpage  --> 
+
+# Como o R funciona e onde obter ajuda
+
+Como em qualquer tarefa de programação, para que a linguaguem `R` e o ambiente RStudio 
+possam ser utilizados de forma adequada com o objetivo de ser obter a máxima eficiência 
+dessas ferramentas, é necessário ter muita, mas muita organização. Só assim é possível 
+garantir replicabilidade da análise, checagem e sua validação. Felizmente, o RStudio foi
+programado para nos ajudar nessa tarefa. Por isso, vamos começar por aprender a criar um projeto em seu ambiente.
+
+## Criando um projeto com versionamento
+
+Para criar um ambiente de projeto, basta seguir os 5 passos seguir. Para mais informações, ver:
+- [\textcolor{blue}{Webinar RStudio}](https://www.rstudio.com/resources/webinars/rstudio-essentials-webinar-series-managing-change-part-1/)^[Para acesso a outros Webinars, acessar: https://www.rstudio.com/resources/webinars/].
+
+- Veja especialmete [\textcolor{blue}{esse Webinar}](https://www.rstudio.com/resources/webinars/rstudio-essentials-webinar-series-managing-part-2/).
+
+**Passo 1 - Novo Projeto:**
+
+```{r fig.width=5, fig.height=50, fig.align="center", echo=FALSE}
+library(png)
+library(jpeg)
+library(grid)
+img <- readPNG("./imagens/0-novo-projeto.png")
+ grid.raster(img)
+```
+
+**Passo 2 - Diretório:**
+
+```{r fig.width=5, fig.height=50, fig.align="center", echo=FALSE}
+library(png)
+library(jpeg)
+library(grid)
+img <- readPNG("./imagens/1-novo-projeto.png")
+ grid.raster(img)
+```
+
+**Passo 3 - Ambiente criado:**
+
+```{r fig.width=5, fig.height=50, fig.align="center", echo=FALSE}
+library(png)
+library(jpeg)
+library(grid)
+img <- readPNG("./imagens/2-novo-projeto.png")
+ grid.raster(img)
+```
+
+**Passo 4 - Novo Script:**
+
+```{r fig.width=5, fig.height=50, fig.align="center", echo=FALSE}
+library(png)
+library(jpeg)
+library(grid)
+img <- readPNG("./imagens/3-novo-projeto.png")
+ grid.raster(img)
+```
+
+**Passo 5 - Salvando Script:**
+
+```{r fig.width=5, fig.height=50, fig.align="center", echo=FALSE}
+library(png)
+library(jpeg)
+library(grid)
+img <- readPNG("./imagens/5-novo-projeto.png")
+ grid.raster(img)
+```
+
+Pronto, agora o ambiente está preparado para início das atividades.
+
+## Onde obter ajuda
+
+O `R` é um software livre, o RStudio é um software livre, suas potencialidades resultam
+da contribuição de inúmeros profissionais ao redor do globo. Por esta razão, quase tudo
+que se deseja fazer ou conhecer a respeito dessas duas ferramentas está gratuitamente disponível na web.
+A regra é colaborar!
+
+### Fóruns
+
+- [\textcolor{blue}{Stackoverflow - EN}](https://stackoverflow.com/)
+
+- [\textcolor{blue}{Stackoverflow - PT}](https://pt.stackoverflow.com/)
+
+### Documentação e tutoriais
+
+- Ajuda das funções, por exemplo: `?sum`, `?head`, `?summary`.
+
+- [\textcolor{blue}{Documentação dos Pacotes - ex: ggplot2}](https://cran.r-project.org/web/packages/ggplot2/index.html)
+
+- [\textcolor{blue}{Vinhetas dos Pacotes - ex: ggplot2}](https://ggplot2.tidyverse.org/)
+
+- [\textcolor{blue}{Cheat Sheets}](https://www.rstudio.com/resources/cheatsheets/)
+
+### Guia de estilo
+
+- [\textcolor{blue}{RStudio's R Style Guide}](http://adv-r.had.co.nz/Style.html)
+
+- [\textcolor{blue}{Google's R Style Guide}](https://google.github.io/styleguide/Rguide.xml)
+
+<!-- \newpage --> 
+
+# Estruturas de dados no R 
+
+## Operadores aritiméticos, operadores lógicos e de comparação
+
+```{r echo = FALSE, results = 'asis'}
+library(knitr)
+Sinal <- c("+", "-", "/", '*', "^")  
+Operacao <- c("Soma", "Subtração", "Divisão", "Multiplicação", "Potência") 
+df <- data.frame(Sinal, Operacao)
+kable(df, caption = "Operadores matemáticos")
+```
+
+```{r echo = FALSE, results = 'asis'}
+library(knitr)
+Sinal <- c("==", "!=", "<", ">", "<=", ">=", "&", "|", "#", "%in%")  
+Operacao <- c("Igual", "Diferente", "Menor", "Maior", "Menor igual", "Maior igual", "E", "Ou", "Comentário", "Está presente em") 
+df <- data.frame(Sinal, Operacao)
+kable(df, caption = "Operadores lógicos e de comparação")
+```
+
+## Estruturas de dados
+
+### Variáveis e Vetores
+
+```{r, results = 'asis', echo = TRUE, results = "hide"}
+x <- 1
+
+x
+
+x <- 2
+
+x
+
+x <- c(1, 2)
+
+x
+
+is.vector(x)
+
+length(x)
+
+x <- c(1:10)
+
+x
+
+x <- seq(1, 50, 5)
+
+x
+
+class(x)
+
+is.numeric(x)
+
+x <- c("TCE", "PE", "Recife")
+
+x
+
+x[2]
+
+is.numeric(x)
+
+class(x)
+
+is.character(x)
+
+x <- c(1, 2, "Recife")
+
+class(x)
+
+```
+
+### Matrizes
+
+```{r, results = 'asis', echo = TRUE, results = "hide"}
+m1 <- matrix( c(1,11,2,22,3,33),
+               nrow=3,
+               ncol=2,
+               byrow=TRUE)
+
+m1
+
+class(m1)
+
+dim(m1)
+
+m1[2,2]
+
+
+v1 <- c(1,2,3)
+
+v2 <- c(4,5,6)
+
+m2 <- rbind(v1, v2)
+
+m2
+
+dim(m2)
+```
+
+### Listas
+
+```{r, results = 'asis', echo = TRUE, results = "hide"}
+a <- c(1, 2, 3)
+
+b <- c("a", "b", "c", "d")
+
+c <- c(TRUE, FALSE, TRUE, TRUE)
+
+lista1 <- list(a, b, c)
+
+lista1
+
+lista1[1]
+
+class(lista1[1])
+
+
+lista1[[1]]
+
+class(lista1[[1]])
+
+
+lista1[[2]][1] <- "j"
+
+lista1[[2]]
+
+
+```
+
+### Data Frames
+
+```{r, results = 'asis', echo = TRUE, results = "hide"}
+bd <- data.frame(id = c(1:5), nivel = c("baixo","medio","alto","medio","alto"), 
+                 n.alunos = c(500, 200, 100, 200, 100))
+
+bd
+
+dim(bd)
+
+str(bd)
+
+summary(bd)
+
+bd$nivel
+
+class(bd$nivel)
+
+table(bd$nivel)
+```
+
+### Atividade prática:
+
+```{r, results = 'asis', eval = FALSE}
+# O R possui algumas bases de dados para teste. Uma delas é "mtcars". 
+head(mtcars)
+
+# Com a base de dados mtcars, obtenha:
+# Uma descrição dos tipos de variáveis da base
+# Um resumo descritivo da base
+# O número de dimensões da base
+# Imprima a terceira coluna
+# Imprima a segunda linha
+# O quarto elemento presente na variável "cyl"
+```
+
+## Exemplo de uso dos operadores
+
+```{r, results = 'asis', echo = TRUE, results = "hide"}
+# Soma valores
+1+1  
+
+# Soma variáveis
+x <- 1
+
+y <- 2
+
+x + y
+
+x * y
+
+# Soma vetores
+x <- c(1:3)
+
+y <- c(1:3)
+
+x + y
+
+sum(x)
+
+sum(x) == sum(y)
+
+sum(x + y)
+
+x + 1
+
+# Comparação 
+1 == 1
+
+x == y
+
+x != y
+
+# Comparação
+x <- c(1:10)  # Atribuindo valores de 1 a 10 a x
+
+x  # verificando x
+
+x[(x>8) | (x<5)]   # Verificando em x quais elementos são maiores que 8 ou menores que 5
+
+# Comparação 
+
+y <- c(1,2,3)  # Atribuindo valores de 1 a 3 a y
+
+x %in% y  # Verificando quais elementos de x também pertencem a y
+```
+
+<!-- \newpage --> 
+
+# Importação e exportação de dados
+
+Para uma rápida introdução ao tópico, veja^(Outras "Folhas de dicas" podem ser encontradas em: https://www.rstudio.com/resources/cheatsheets/): [Cheat Sheet: Importação de dados](https://github.com/rstudio/cheatsheets/raw/master/data-import.pdf)
+
+Neste curso, vamos usar diferentes bases de dados para os exemplos. Porém, a principal
+será a base de [\textcolor{blue}{Microdados Censo Escolar de 2016}](http://inep.gov.br/microdados).
+
+## Tipos de arquivos de dados
+
+O `R` é uma linguagem muito maleável. Praticamente aceita e opera todas as estruturas de dados
+disponíveis sem grandes problemas. Para que se tenha sucesso na importação ou exportação dos dados, basta que
+se faça o uso do pacote correto, podendo esse ser encontrado através de consultas na internet e nos links
+apresentados no material e nos encontros. De todo modo, para análise de dados em geral é recomenável que se trabalhe com
+dados em arquivos de extenção consideradas simples, são elas: .txt, .csv, .RData.
+
+## Importação de dados
+
+Os [\textcolor{blue}{Microdados Censo Escolar de 2016}](http://inep.gov.br/microdados) referem-se a 
+uma série de bases de dados que podem ser carregadas separadamente no `R`, sendo essa uma de suas
+principais características. Reconhecendo a importância e potencialidade da linguagem o diretório 
+de disponibilização da base de dados do INEP traz consigo o arquivo "LEIA-ME", no qual apresnta a
+melhor maneira de carregar os dados de acordo com o software estatístico que será utilizado. É com base
+nesse arquivo que faremos a importação dos dados.
+
+### Definindo diretório:
+
+Para que o `R` encontre arquivos solicitados para importação ou para que possa exportar arquivos,
+é necessário que seja indicado ao programa o diretório correto. Como estamos trabalhando com um ambiente de projeto, o `R` automaticamente terá como diretório de referência o diretório no qual foi salvo o projeto. 
+
+Para fazer a verificação de qual diretório está sendo utilizado, basta usar a função `getwd()`.
+
+```{r , results = 'asis'}
+getwd()
+```
+
+Como este não é o diretório direto no qual estão os dados de interesse, é possível definir novo diretório
+a partir da função `setwd()`.
+
+```{r , results = 'asis'}
+setwd("./dados/")
+```
+### Abertura de bases pequenas (ESCOLAS e TURMAS):
+
+Com o diretório definido, vamos seguir as orientações do arquivo "LEIA-ME" disponibilizado
+pelo INEP.
+
+```{r, eval = FALSE}
+setwd("./dados/")
+
+turmas <- read.csv2("TURMAS.csv", sep = "|")  # Carregando base de dados
+```
+
+Verificando aspectos estruturais da base de dados:
+
+```{r, eval = FALSE}
+dim(turmas)  # verificando dimensões da base de dados
+
+names(turmas)[1:10]  # verificando nomes das colunas na base de dados
+
+head(turmas[, 1:5])  # verificando as primeiras 6 linhas da base de dados
+```
+
+### Abertura de bases maiores (MATRÍCULAS e DOCENTES):
+
+Como o arquivo "LEIA-ME" bem indica, o software `R`, como padrão, trabalha com as bases de dados utilizando a memória RAM do computador. O carregamento de bases muito grandes utilizando a leitura tradicional (como `read.table` ou `read.csv`) pode sobrecarregar o computador, ou mesmo resultar em erro por falta de memória. Dessa forma, para a leitura das bases de MATRÍCULAS e DOCENTES, que possuem mais de 10 milhões de linhas (Brasil), faz-se necessário o uso de pacotes adicionais. 
+
+O INEP, portanto, sugere o uso do pacote `ffbase` para trabalhar com essas bases, tendo em vista que o mesmo faz uso do disco rígido ao invés da memória RAM. O pacote `ffbase` armazena a base de dados no R como um objeto da classe `ffdf` - diferentemente da leitura tradicional, que gera um objeto da classe `data.frame`. 
+
+O objeto `ffdf` também permite a aplicação de algumas funções – não todas – que são utilizadas com objetos da classe `data.frame` (por exemplo, `table`, `merge` e `transform`). Para aplicação de filtros nas bases `ffdf`, recomendamos o uso da função `ffwhich` (veja a ajuda da função para maiores informações: `?ffwhich`). Além disso, para concatenar as bases de cada região (as bases Docentes e Matrículas estão separadas por região), uma abaixo da outra, é necessário utilizar a função `ffdfappend` (para mais informações: `?ffdfappend`). Informações adicionais estão disponíveis na [\textcolor{blue}{ajuda do pacote}](https://cran.r-project.org/web/packages/ffbase/ffbase.pdf).
+
+```{r, results = 'asis', eval = FALSE}
+install.packages("ffbase", dependencies = TRUE)  # instalando o pacote
+
+require(ffbase)  # carregando o pacote
+
+# definindo diretório
+setwd("./dados/")
+
+# carregando base de dados
+docentes_ne <- read.csv2.ffdf(file = "DOCENTES_NORDESTE.csv", sep = "|", first.rows=100000)
+
+# verificando estrutura da base de dados
+dim(docentes_ne)
+
+docentes_ne[1:5,]
+
+names(docentes_ne)
+
+table.ff(docentes_ne$CO_UF)
+```
+
+Pronto, agora temos em nosso ambiente de trabalho duas bases de dados: `turmas` e
+`docentes_ne`.
+
+## Exportação de dados
+
+### Arquivos em formato `ffdf`
+Em função do tamanho dos arquivos do Microdados do Censo Escolar, o INEP recomenda que 
+as bases de dados muito grandes sejam salvas já no formato padrão do pacote `ffbase`, o 
+formato `ffdf`.
+
+```{r, results = 'asis', eval = FALSE}
+# definindo diretório
+setwd("./dados/")
+
+save.ffdf(docentes_ne, dir = "./docentes_ne", overwrite = TRUE)
+rm(list = ls())  # limpando ambiente de trabalho
+```
+
+Para carregar arquivos no formato `ffdf` pode-se usar a função `load.ffdf`.
+
+```{r, results = 'asis', eval = FALSE}
+# definindo diretório
+setwd("./dados/")
+
+load.ffdf(dir="./docentes_ne")
+rm(list = ls())  # limpando ambiente de trabalho
+
+```
+
+### Arquivos em formato `.RData`
+
+No caso de uma base de dados menor, podemos salvá-la em outros formatos. Um formato
+muito utilizado é o `.RData`. Utilizando a base `turmas` a seguir faremos um filtro selecionando
+somente turmas do Estado de PE e salvaremos o resultado do filtro em formato `.RData`.
+
+```{r, results = 'asis', eval = FALSE}
+
+setwd("./dados/")
+
+turmas <- read.csv2("TURMAS.csv", sep = "|")  # Carregando base de dados
+
+# selecionando linhas da base nas quais CO_UF == 26
+turmas_pe <- subset(turmas, turmas$CO_UF == "26")
+
+# comparando as bases
+dim(turmas)
+
+dim(turmas_pe)
+
+# definindo diretório
+setwd("./dados/")
+
+# salvando nova base
+save(turmas_pe, file ="turmas_pe.RData")
+
+rm(list = ls())  # limpando ambiente de trabalho
+
+```
+
+Para carregar o arquivo salvo, basta:
+
+```{r, results = 'asis', eval = FALSE}
+# definindo diretório
+setwd("./dados/")
+
+load("turmas_pe.RData")  # Carregando base de dados
+
+dim(turmas_pe)  # verificando dimensões da base de dados
+
+names(turmas_pe)  # nomes das colunas da base de dados
+
+head(turmas_pe)  # início da base de dados
+```
+
+
+<!-- \newpage --> 
+
+<!-- \newpage --> 
+
+# Atividade Prática - Git Commit / Push / Pull
+
+* Assista ao Webinar [\textcolor{blue}{Managing Part 2}](https://www.rstudio.com/resources/webinars/rstudio-essentials-webinar-series-managing-part-2/). Faça o versionamento do seu projeto e crie um repositório público. Veja como fazer o `commit` e o `push` para o repositório. Veja também como importar (`pull`) o repositório.
+
+# Atividade Prática - R
+
+<!-- * Faça a instalação do [\textcolor{blue}{R}](https://cran.r-project.org/), do [\textcolor{blue}{RStudio}](https://www.rstudio.com/) e do [\textcolor{blue}{Miktex}](https://miktex.org/). --> 
+
+* Inicie o RStudio, abra um novo R Script declare duas variáveis (`x` e `y`), 
+atribua valores numéricos a elas e o resultado de sua soma à variável `z`.
+
+* No mesmo R script, abra a base de dados de docentes do nordeste disponíveis no microdados do censo
+atribuindo-a ao objeto `bd` e obtenha a média de idade (`NU_IDADE`) com a função `mean` conforme o exemplo abaixo.
+
+```{r cars}
+mean(cars$dist)
+```
+
+<!-- * Envie o script de seu trabalho para: \textcolor{blue}{davi.moreira@gmail.com}.
+Coloque o assunto de seu e-mail no seguinte formato: Curso R TCE - Turma "M/V" - Aula "N": "NOME DO ALUNO". --> 
+
+# Links úteis para o próximo encontro
+
+* [Cheat Sheet: Transformação de dados](https://github.com/rstudio/cheatsheets/raw/master/data-transformation.pdf)
+
+* [Cheat Sheet: Tidyverse](https://s3.amazonaws.com/assets.datacamp.com/blog_assets/Tidyverse+Cheat+Sheet.pdf)
