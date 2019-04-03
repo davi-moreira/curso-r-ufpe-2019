@@ -52,7 +52,7 @@ Até o final do encontro o aluno deverá ser capaz de:
 
 ## Material do curso
 
-- O conteúdo do curso estará compartilhado neste [\textcolor{blue}{Repositório do Git}](https://github.com/davi-moreira/curso-r-ufpe-2018). 
+- O conteúdo do curso estará compartilhado neste [\textcolor{blue}{Repositório do Git}](https://github.com/davi-moreira/curso-r-ufpe-2019). 
 - Ao longo dos encontros diferentes referências serão utilizadas e apresentadas. 
 Entre elas, três se destacam:
 
@@ -67,7 +67,7 @@ Entre elas, três se destacam:
 ## O que é o R?
 
 R é uma linguagem de programação e também um ambiente de desenvolvimento integrado 
-para cálculos estatísticos e gráficos ([Wikipédia](https://pt.wikipedia.org/wiki/R_(linguagem_de_programa%C3%A7%C3%A3o))). 
+para cálculos estatísticos e gráficos ([\textcolor{blue}{Wikipédia}](https://pt.wikipedia.org/wiki/R_(linguagem_de_programa%C3%A7%C3%A3o))). 
 
 ```{r fig.width=1, fig.height=10, fig.align="center", echo=FALSE}
 library(png)
@@ -78,7 +78,7 @@ img <- readPNG("./imagens/R_logo.png")
 
 ## O que é o RStudio?
 
-O [RStudio](https://www.rstudio.com/) é um software livre de ambiente de desenvolvimento integrado (IDE) para R ([Wikipédia RStudio](https://pt.wikipedia.org/wiki/RStudio)). IDE, do inglês *Integrated Development Environment* ou Ambiente de Desenvolvimento Integrado, é um programa de computador que reúne características e ferramentas de apoio ao desenvolvimento de software com o objetivo de agilizar este processo ([Wikipédia IDE](https://pt.wikipedia.org/wiki/Ambiente_de_desenvolvimento_integrado)).
+O [\textcolor{blue}{RStudio}](https://www.rstudio.com/) é um software livre de ambiente de desenvolvimento integrado (IDE) para R ([\textcolor{blue}{Wikipédia RStudio}](https://pt.wikipedia.org/wiki/RStudio)). IDE, do inglês *Integrated Development Environment* ou Ambiente de Desenvolvimento Integrado, é um programa de computador que reúne características e ferramentas de apoio ao desenvolvimento de software com o objetivo de agilizar este processo ([\textcolor{blue}{Wikipédia IDE}](https://pt.wikipedia.org/wiki/Ambiente_de_desenvolvimento_integrado)).
 
 ## O ambiente do RStudio
 
@@ -96,8 +96,8 @@ img <- readJPEG("./imagens/1-tela-inicial.jpeg")
 library(png)
 library(jpeg)
 library(grid)
-img <- readJPEG("./imagens/1-tela-inicial.jpeg")
- grid.raster(img)
+img <- readPNG("./imagens/r_rstudio_motor.png")
+grid.raster(img)
 ```
 
 ## O que é versionamento e o GitHub?
@@ -105,6 +105,8 @@ img <- readJPEG("./imagens/1-tela-inicial.jpeg")
 Um sistema de controle de versões (ou versionamento - [\textcolor{blue}{Wiki}](https://pt.wikipedia.org/wiki/Sistema_de_controle_de_vers%C3%B5es)), VCS (do inglês *version control system*) ou ainda SCM (do inglês *source code management*) na função prática da Ciência da Computação e da Engenharia de Software, é um software que tem a finalidade de gerenciar diferentes versões no desenvolvimento de um documento qualquer. 
 
 O [\textcolor{blue}{GitHub}](https://github.com/) é uma plataforma de hospedagem de código para controle de versão e colaboração. Ele permite que você e outros trabalhem juntos em projetos de qualquer lugar. Para mais detalhes, veja [\textcolor{blue}{este Tutorial}](https://guides.github.com/activities/hello-world/).
+
+- Referência: [\textcolor{blue}{Happy Git and GitHub for the useR}](https://happygitwithr.com/)
 
 ### Fluxo de versionamento:
 
@@ -688,6 +690,6 @@ Coloque o assunto de seu e-mail no seguinte formato: Curso R TCE - Turma "M/V" -
 
 # Links úteis para o próximo encontro
 
-* [Cheat Sheet: Transformação de dados](https://github.com/rstudio/cheatsheets/raw/master/data-transformation.pdf)
+* [\textcolor{blue}{Cheat Sheet: Transformação de dados}](https://github.com/rstudio/cheatsheets/raw/master/data-transformation.pdf)
 
-* [Cheat Sheet: Tidyverse](https://s3.amazonaws.com/assets.datacamp.com/blog_assets/Tidyverse+Cheat+Sheet.pdf)
+* [\textcolor{blue}{Cheat Sheet: Tidyverse}](https://s3.amazonaws.com/assets.datacamp.com/blog_assets/Tidyverse+Cheat+Sheet.pdf)
