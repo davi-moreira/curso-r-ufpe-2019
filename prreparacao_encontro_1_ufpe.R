@@ -1,4 +1,6 @@
-# Encontro 1 - UFPE
+# Introducao Linguagem R - UFPE - 2019
+# Davi Moreira
+# Encontro 1/4
 
 # Estruturas de dados no R 
 
